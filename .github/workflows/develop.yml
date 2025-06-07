@@ -35,14 +35,6 @@ jobs:
         docker tag react-with-google-oauth:latest ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
         docker push ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
 
-    # - name: Deploy
-    #   run: |
-    #     aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
-    #     cd my-next-app
-    #     docker build -t react-with-google-oauth .
-    #     docker tag react-with-google-oauth:latest ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
-    #     docker push ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
-
-    # - name: Update Lambda Function
-    #   run: |
-    #     aws lambda update-function-code --function-name react-with-google-oauth --image-uri ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
+    - name: Update Lambda Function
+      run: |
+        aws lambda update-function-code --function-name react-with-google-oauth --image-uri ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
