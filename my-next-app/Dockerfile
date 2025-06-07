@@ -16,6 +16,8 @@ RUN npm install && \
 
 FROM base AS runner
 
+COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 /lambda-adapter /opt/extensions/lambda-adapter
+
 ENV NEXTAUTH_URL=${NEXTAUTH_URL}
 ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
 ENV GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
