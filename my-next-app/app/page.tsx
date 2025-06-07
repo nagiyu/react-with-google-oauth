@@ -1,8 +1,27 @@
+"use client";
+
 import Image from "next/image";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <div>
+        <h1>サインイン</h1>
+        {!session ? (
+          <>
+            <p>サインインしてください。</p>
+            <button onClick={() => signIn()}>Login with Google</button>
+          </>
+        ) : (
+          <>
+            <p>ようこそ、{session.user?.name}さん！</p>
+            <button onClick={() => signOut()}>Logout</button>
+          </>
+        )}
+      </div>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
