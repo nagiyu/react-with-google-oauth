@@ -31,7 +31,7 @@ jobs:
       run: |
         aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
         cd my-next-app
-        docker build --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} -t react-with-google-oauth
+        docker build --build-arg NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} --build-arg GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} --build-arg GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} -t react-with-google-oauth .
         docker tag react-with-google-oauth:latest ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
         docker push ${{ secrets.AWS_REPOSITORY_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-with-google-oauth:latest
 
