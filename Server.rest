@@ -1,4 +1,12 @@
 @host = http://localhost:3001
+@token = 
 
 ###
 GET {{host}}
+
+###
+GET {{host}}/api/parse-token
+
+###
+GET {{host}}/api/parse-token
+Authorization: Bearer {{token}}
