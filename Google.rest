@@ -1,0 +1,5 @@
+@accessToken = 
+
+### User Info
+GET https://www.googleapis.com/oauth2/v3/userinfo
+Authorization: Bearer {{accessToken}}
