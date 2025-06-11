@@ -1,12 +1,14 @@
+import { IAccessToken } from "@/app/interface/IAccessToken";
+
 declare module "next-auth" {
   interface Session {
-    token?: string;
+    tokens: IAccessToken[];
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    access_token?: string;
+    tokens: IAccessToken[];
   }
 }
 

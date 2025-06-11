@@ -12,14 +12,22 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ token, user, account }) {
       if (user && account) {
-        token.access_token = account.access_token;
+        if (account.access_token) {
+          token.tokens = token.tokens || [];
+          token.tokens.push(
+            {
+              provider: account.provider,
+              accessToken: account.access_token
+            }
+          );
+        }
       }
 
       return token;
     },
 
     async session({ session, token }) {
-      session.token = token.access_token || '';
+      session.tokens = token.tokens || [];
       return session;
     }
   }
