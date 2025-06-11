@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import { authOptions } from "@/app/config/authOptions";
 
 declare module "next-auth" {
   interface Session {
-    token: string;
+    token?: string; // token プロパティをオプショナルに変更
   }
 }
 
@@ -13,28 +13,6 @@ declare module "next-auth/jwt" {
   }
 }
 
-const handler = NextAuth({
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
-  secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async jwt({ token, user, account }) {
-      if (user && account) {
-        token.access_token = account.access_token;
-      }
-
-      return token;
-    },
-
-    async session({ session, token }) {
-      session.token = token.access_token || '';
-      return session;
-    }
-  }
-});
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
