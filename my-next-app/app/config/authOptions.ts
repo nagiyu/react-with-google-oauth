@@ -1,4 +1,5 @@
 import GoogleProvider from "next-auth/providers/google";
+import LINE from "next-auth/providers/line";
 import { AuthOptions } from "next-auth";
 
 export const authOptions: AuthOptions = {
@@ -7,6 +8,10 @@ export const authOptions: AuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+    LINE({
+      clientId: process.env.LINE_CHANNEL_ID!,
+      clientSecret: process.env.LINE_CHANNEL_SECRET!,
+    })
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {

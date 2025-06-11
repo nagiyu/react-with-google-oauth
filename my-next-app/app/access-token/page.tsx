@@ -23,6 +23,15 @@ const AccessTokenPage = async () => {
     return (
         <div>
             <h1>Access Token</h1>
+
+            <br />
+            {accessToken.map((token, index) => (
+                <p key={index}>
+                    {token.provider}: {token.accessToken}
+                </p>
+            ))}
+            <br />
+
             {token ? (
                 <p>{token}</p>
             ) : (

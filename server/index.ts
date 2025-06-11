@@ -29,14 +29,29 @@ app.get('/api/parse-token', (req: Request, res: Response) => {
       // Google の場合
       const googleToken = tokens.find((token) => token.provider === 'google');
       if (googleToken) {
-        var response = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+        var googleResponse = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
           headers: {
             Authorization: `Bearer ${googleToken.accessToken}`,
           }
         });
 
-        if (response.status === 200 && 'email' in response.data) {
-          res.json({ email: response.data.email });
+        if (googleResponse.status === 200 && 'email' in googleResponse.data) {
+          res.json({ email: googleResponse.data.email });
+          return;
+        }
+      }
+
+      // LINE の場合
+      const lineToken = tokens.find((token) => token.provider === 'line');
+      if (lineToken) {
+        var lineResponse = await axios.get('https://api.line.me/v2/profile', {
+          headers: {
+            Authorization: `Bearer ${lineToken.accessToken}`,
+          }
+        });
+
+        if (lineResponse.status === 200 && 'userId' in lineResponse.data) {
+          res.json({ UserId: lineResponse.data.userId });
           return;
         }
       }

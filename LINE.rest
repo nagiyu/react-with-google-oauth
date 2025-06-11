@@ -1,0 +1,5 @@
+@accessToken = 
+
+### User Info
+GET https://api.line.me/v2/profile
+Authorization: Bearer {{accessToken}}
