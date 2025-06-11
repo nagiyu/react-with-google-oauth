@@ -10,8 +10,14 @@ COPY package*.json ./
 # 依存関係をインストール
 RUN npm install
 
+# TypeScriptをインストール
+RUN npm install -g typescript
+
 # アプリケーションのソースコードをコピー（node_modulesを除外）
 COPY . .
+
+# TypeScriptをコンパイル
+RUN tsc
 
 # アプリケーションがリッスンするポートを指定
 EXPOSE 3000
